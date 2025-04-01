@@ -1,4 +1,4 @@
-// modal.module.scss
+
 
 .modal {
   position: fixed;
@@ -13,7 +13,7 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgb(15, 55, 70);
   padding: 20px;
   border-radius: 8px;
   text-align: center;
@@ -28,5 +28,5 @@
 }
 
 .button:hover {
-  background-color: #ddd;
+  background-color: #1b3b64;
 }
