@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import "./globals.css";
+import  "./globals.css";
 import { LogoutButton } from "./сomponents/LogoutButton";
 
 export default function RootLayout({
@@ -10,7 +10,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="sidebar">
+        
         <img src="Logo.png" alt="logo" /> <br/>
         <LogoutButton/><br/>
         <a href="project">projects</a> <br/>
