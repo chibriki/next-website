@@ -25,14 +25,7 @@ export const AddWorker = () => {
     const form = new FormData();
     Object.entries(formData).forEach(([key, value]) => form.append(key, value));
 
-    const result = await addWorker(form);
-    
-    if (result.success) {
-      console.log("Worker added successfully", result.worker);
-      setIsModalOpen(false);
-    } else {
-      console.error("Error adding worker:");
-    }
+  
   };
 
   return (
