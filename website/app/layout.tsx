@@ -16,7 +16,7 @@ export default function RootLayout({
         <LogoutButton/><br/>
         <a href="project">projects</a> <br/>
         <a href="lifts_page_worker">lifts</a> <br/>
-        <a href="worker">workers</a> <br/>
+        <a href="workers">workers</a> <br/>
         <a href="chat">general chat</a> <br/>
 
         {children}
