@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
-import style from  './styles.module.scss';  
+import style from  './LogoutButton.module.scss';  
 
 export const LogoutButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,8 +19,6 @@ export const LogoutButton = () => {
 
   const handleConfirmLogout = () => {
 
-    console.log("Logging out...");
-
     setIsModalOpen(false);
 
     window.location.href = "/login_page";
@@ -28,13 +26,14 @@ export const LogoutButton = () => {
 
   return (
     <div>
-      <button onClick={handleLogoutClick}>Logout</button>
+      <button className = {style.button_logout} onClick={handleLogoutClick}>Log out</button>
+
       {isModalOpen && (
-        <div className={style.modal}>
-          <div className={style.modalContent}>
+        <div className={style.modal}>  
+          <div className={style.modal_content}>
             <h2>Are you sure you want to log out?</h2>
-            <button className={style.button} onClick={handleConfirmLogout}>Yes, Log Out</button>
-            <button className={style.button} onClick={handleCloseModal}>Cancel</button>
+            <button className={style.modal_button} onClick={handleConfirmLogout}>Log out</button>
+            <button className={style.modal_button_cancel} onClick={handleCloseModal}>Cancel</button>
           </div>
         </div>
       )}

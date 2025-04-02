@@ -1,7 +1,7 @@
-'use client';
-import { LoginForm } from "@/app/сomponents/BasicLogin";
-export default function Home() {
+"use client";
+
+export default function LoginPage() {
   return (
-   <LoginForm />
+    <h2> huy </h2>
   );
 }
