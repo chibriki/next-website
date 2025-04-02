@@ -39,13 +39,11 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
                   <div>General Chat</div>
               </div>
             </div>
-            <div className = "top_bar"> </div>
-            <LogoutButton />
-            </div> 
-            <div className = "blue_container">
-
-            </div>
-
+          <div className = "top_bar">
+             <LogoutButton />
+          </div>
+         </div>
+          {children}
         </body>
       </html>
   );

@@ -1,0 +1,31 @@
+.container {
+    position: fixed; /* Keeps it in place even when scrolling */
+    right: 0;   
+    bottom: 0;
+    
+    width: 70%;  /* Adjust the width as needed */
+    height: 92%; /* Adjust the height as needed */
+    
+    display: flex;
+    align-items: left;
+    justify-content: center;
+
+    padding: 20px;
+  }
+
+  .redirect_button{
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+    background-color: rgb(79, 79, 79);
+    color: rgb(255, 255, 255);
+    border-style: none;
+    font-size: 13px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+  }
+
+  .redirect_button:hover{
+    background-color: rgb(53, 53, 53);
+  }
+  

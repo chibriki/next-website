@@ -23,7 +23,8 @@
   display: inline-flex;  
   height: 100vh;
   width: 100vw;
-  background-color: rgb(25, 90, 100);
+   background-color: rgb(25, 90, 100);
+   position: fixed;
 }
 
 .top_bar {
@@ -36,6 +37,7 @@
   padding: 0 20px;
   color: white;
   font-weight: bold;
+  position: fixed;
 }
 
 .sidebar {
