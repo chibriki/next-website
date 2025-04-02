@@ -1,17 +1,17 @@
-// lib/db.ts
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client'
 
-let prisma: PrismaClient;
+const prisma = new PrismaClient()
 
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient();
-} else {
-  // In development, we use a global variable to ensure
-  // we don't create a new PrismaClient on every request
-  if (!global.prisma) {
-    global.prisma = new PrismaClient();
-  }
-  prisma = global.prisma;
+async function main() {
+  const allUsers = await prisma.user.findMany()
 }
 
-export default prisma;
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  })
