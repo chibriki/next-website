@@ -1,0 +1,146 @@
+// login.module.scss
+
+$primary-color: #007bff;
+$error-color: #ff4d4d;
+
+
+.pageContainer {
+  background-image: url('/background_of_login_page.jpg'); 
+  background-size: cover;        
+  background-position: center;   
+  background-repeat: no-repeat;  
+  height: 100vh;                 
+  width: 100%;                   
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header_of_login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #171717;
+  padding: 10px;
+  color: white;
+
+  .logo_container img {
+    width: 80px;
+  }
+
+  .user_image_section {
+    display: flex;
+    align-items: center;
+
+    .user_image_container {
+      position: relative;
+      cursor: pointer;
+
+      .user_image {
+        width: 50px;
+        border-radius: 100%;
+      }
+
+      .tooltip {
+        visibility: hidden;
+        background-color: #444;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-70%);
+        white-space: nowrap;
+      }
+
+      &:hover .tooltip {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.central_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+
+  .login_container {
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    width: 350px;
+
+    .main_text {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .section {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+
+        
+
+      }
+
+
+      .error_message {
+        color: $error-color;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.bottom_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  color: white;
+
+  .info_image_container {
+    transform: translateY(-20px);
+    position: top;
+    display: inline-block;
+
+    .info_image {
+      border-radius: 100%;   
+      opacity: 60%; 
+      background-color: #818181;
+      width: 50px;
+      cursor: pointer;
+    }
+
+    .tooltip_info {
+      visibility: hidden;
+      background-color: #444;
+      color: white;
+      padding: 5px;
+      border-radius: 10px;
+      position: absolute;
+      bottom: -60px;
+      left: -245%;
+      transform: translateY(-80%);
+      width: 300px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    &:hover .tooltip_info {
+      visibility: visible;
+    }
+  }
+}
