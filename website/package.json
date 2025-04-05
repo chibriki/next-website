@@ -29,5 +29,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "prisma": {
+    "schema": "prisma\\schema.prisma"
+  }
 }
