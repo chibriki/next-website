@@ -8,6 +8,11 @@ export async function loginValidation(username: string, password: string) {
 
   if (!user) return [false, 'No such user'];
 
-  const valid = user.password === password; // hash check if needed
-  return valid ? [true, user.role] : [false, 'Invalid password'];
+
+  const valid = user.password === password;
+  if (valid) {
+    return [true, user.role]; 
+  } else {
+    return [false, 'Invalid password'];
+  }
 }
