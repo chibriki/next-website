@@ -21,7 +21,7 @@ export const LogoutButton = () => {
 
     setIsModalOpen(false);
 
-    window.location.href = "/login_page";
+    window.location.href = "/login";
   };
 
   return (

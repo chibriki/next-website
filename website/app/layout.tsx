@@ -12,7 +12,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
   const router = useRouter();
 
 
-  if (pathname === "/login_page") {
+  if (pathname === "/login") {
     return (
     <html lang="en"><body>{children}</body></html>);
   }

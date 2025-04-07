@@ -23,7 +23,7 @@ const {
   Public,
   getRuntime,
   createParam,
-} = require('./runtime/edge.js')
+} = require('./runtime/library.js')
 
 
 const Prisma = {}
@@ -78,6 +78,7 @@ Prisma.NullTypes = {
 
 
 
+  const path = require('path')
 
 /**
  * Enums
@@ -142,11 +143,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-<<<<<<< Updated upstream:website/generated/prisma/edge.js
-      "value": "D:\\GitHubRep\\Hierarchy-Website\\website\\generated\\prisma",
-=======
-      "value": "C:\\Users\\loend\\Documents\\GitHub\\Hierarchy-Website\\website\\prisma\\generated\\prisma-client-js",
->>>>>>> Stashed changes:website/prisma/generated/prisma-client-js/edge.js
+      "value": "D:\\GitHubRep\\Hierarchy-Website\\website\\prisma\\generated\\prisma-client-js",
       "fromEnvVar": null
     },
     "config": {
@@ -160,24 +157,21 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\loend\\Documents\\GitHub\\Hierarchy-Website\\website\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\GitHubRep\\Hierarchy-Website\\website\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-<<<<<<< Updated upstream:website/generated/prisma/edge.js
-    "schemaEnvPath": "../../.env"
-=======
+    "rootEnvPath": "../../../.env",
     "schemaEnvPath": "../../../.env"
->>>>>>> Stashed changes:website/prisma/generated/prisma-client-js/edge.js
   },
-  "relativePath": "../../prisma",
+  "relativePath": "../..",
   "clientVersion": "6.5.0",
   "engineVersion": "173f8d54f8d52e692c7e27e72a88314ec7aeff60",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -186,28 +180,48 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Role {\n  ADMIN\n  WORKER\n}\n\nenum Position {\n  FILTER\n  MECHANIC\n  HEAD_MECHANIC\n}\n\nmodel User {\n  id_user      Int     @id @default(autoincrement())\n  username     String  @unique\n  password     String\n  position     String\n  name         String\n  role         Role\n  phone_number String?\n  id_team      Int?\n}\n",
-  "inlineSchemaHash": "ba7831f2506cfe6fdd2fbbbe6dd240530e175f8a90bf7654b570903b72add50f",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/prisma-client-js\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum Role {\n  ADMIN\n  WORKER\n}\n\nenum Position {\n  FILTER\n  MECHANIC\n  HEAD_MECHANIC\n}\n\nmodel User {\n  id_user      Int     @id @default(autoincrement())\n  username     String  @unique\n  password     String\n  position     String\n  name         String\n  role         Role\n  phone_number String?\n  id_team      Int?\n}\n",
+  "inlineSchemaHash": "f8b46a9b8ebcd270c00593373c5404047e431795968efd7a8b6a212bc9abc720",
   "copyEngine": true
 }
-config.dirname = '/'
+
+const fs = require('fs')
+
+config.dirname = __dirname
+if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
+  const alternativePaths = [
+    "prisma/generated/prisma-client-js",
+    "generated/prisma-client-js",
+  ]
+  
+  const alternativePath = alternativePaths.find((altPath) => {
+    return fs.existsSync(path.join(process.cwd(), altPath, 'schema.prisma'))
+  }) ?? alternativePaths[0]
+
+  config.dirname = path.join(process.cwd(), alternativePath)
+  config.isBundled = true
+}
 
 config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"id_user\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"username\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":true,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"password\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"position\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"name\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"role\",\"kind\":\"enum\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Role\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"phone_number\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"id_team\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{\"Role\":{\"values\":[{\"name\":\"ADMIN\",\"dbName\":null},{\"name\":\"WORKER\",\"dbName\":null}],\"dbName\":null},\"Position\":{\"values\":[{\"name\":\"FILTER\",\"dbName\":null},{\"name\":\"MECHANIC\",\"dbName\":null},{\"name\":\"HEAD_MECHANIC\",\"dbName\":null}],\"dbName\":null}},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = undefined
 config.compilerWasm = undefined
 
-config.injectableEdgeEnv = () => ({
-  parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
-  }
-})
 
-if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
-  Debug.enable(typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined)
-}
+const { warnEnvConflicts } = require('./runtime/library.js')
+
+warnEnvConflicts({
+    rootEnvPath: config.relativeEnvPaths.rootEnvPath && path.resolve(config.dirname, config.relativeEnvPaths.rootEnvPath),
+    schemaEnvPath: config.relativeEnvPaths.schemaEnvPath && path.resolve(config.dirname, config.relativeEnvPaths.schemaEnvPath)
+})
 
 const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "prisma/generated/prisma-client-js/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "prisma/generated/prisma-client-js/schema.prisma")
