@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useState } from "react";
-
+import style from "./AddWorker.module.scss"
 
 export const AddWorker = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    position: "USER",
+    position: "",
     name: "",
-    role: "EMPLOYEE",
+    role: "",
     phone_number: "",
     id_team: "",
   });
@@ -19,22 +19,49 @@ export const AddWorker = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    const form = new FormData();
-    Object.entries(formData).forEach(([key, value]) => form.append(key, value));
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-  
-  };
+  try {
+    const res = await fetch("/api/add-worker", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (!res.ok) {
+      throw new Error("Something went wrong!");
+    }
+
+    const data = await res.json();
+    console.log("User added:", data);
+
+    setFormData({
+      username: "",
+      password: "",
+      position: "",
+      name: "",
+      role: "",
+      phone_number: "",
+      id_team: "",
+    });
+
+    setIsModalOpen(false);
+  } catch (err) {
+    console.error("Submit error:", err);
+  }
+};
+
 
   return (
     <div>
-      <button onClick={() => setIsModalOpen(true)}>Add Worker</button>
+      <button onClick={() => setIsModalOpen(true)} className = {style.button} >Add Worker</button>
 
       {isModalOpen && (
         <div>
-          <div>
+          <div className={style.formContainer}>
             <form onSubmit={handleSubmit}>
               <input type="text" name="username" placeholder="Username" required onChange={handleChange} />
               <input type="password" name="password" placeholder="Password" required onChange={handleChange} />

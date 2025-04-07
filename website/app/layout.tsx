@@ -4,10 +4,12 @@ import "./globals.css";
 import { LogoutButton } from "./сomponents/LogoutButton";
 
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) 
 {
   const pathname = usePathname();
+  const router = useRouter();
 
 
   if (pathname === "/login_page") {
@@ -29,7 +31,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
                   <div>Lifts</div>
               </div>
 
-              <div className="sidebar_link" onClick={() => (window.location.href = "https://www.youtube.com/watch?v=FQtPSH2ibYQ")}>
+              <div className="sidebar_link" onClick={() => (router.push ("/workers"))}>
                   <img src="/home.svg" />
                   <div>Workers</div>
               </div>

@@ -143,7 +143,11 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
+<<<<<<< Updated upstream:website/generated/prisma/index.js
       "value": "D:\\GitHubRep\\Hierarchy-Website\\website\\generated\\prisma",
+=======
+      "value": "C:\\Users\\loend\\Documents\\GitHub\\Hierarchy-Website\\website\\prisma\\generated\\prisma-client-js",
+>>>>>>> Stashed changes:website/prisma/generated/prisma-client-js/index.js
       "fromEnvVar": null
     },
     "config": {
@@ -157,12 +161,16 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\GitHubRep\\Hierarchy-Website\\website\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\loend\\Documents\\GitHub\\Hierarchy-Website\\website\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
     "rootEnvPath": null,
+<<<<<<< Updated upstream:website/generated/prisma/index.js
     "schemaEnvPath": "../../.env"
+=======
+    "schemaEnvPath": "../../../.env"
+>>>>>>> Stashed changes:website/prisma/generated/prisma-client-js/index.js
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.5.0",
