@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
-import { Role } from "@prisma/client";
+import { Role, Position } from "@prisma/client";
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       data: {
         username: body.username,
         password: body.password,
-        position: body.position,
+        position: body.position as Position,
         name: body.name,
         role: body.role as Role,
         phone_number: body.phone_number || null,
