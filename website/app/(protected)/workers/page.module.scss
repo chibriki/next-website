@@ -1,0 +1,46 @@
+.container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  width: 78%;
+  height: 92%;
+}
+
+.top_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding-bottom: 1rem;
+
+  h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
+
+.scroll_container {
+  max-height: 80%;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #fff;
+}
+
+.worker_card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+
+  p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+  }
+}

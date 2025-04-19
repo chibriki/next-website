@@ -1,7 +1,5 @@
-'use client';
+"use client";
 import { LoginForm } from "@/app/сomponents/BasicLogin";
 export default function Home() {
-  return (
-   <LoginForm />
-  );
+  return <h2>GOVNO</h2>;
 }
