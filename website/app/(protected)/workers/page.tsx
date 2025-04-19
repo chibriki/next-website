@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import style from "./page.module.scss";
 import { AddWorker } from "@/app/сomponents/AddWorker/AddWorker";
+import { EditWorker } from "@/app/сomponents/EditWorker/EditWorker";
 
 type User = {
   id_user: number;
@@ -26,6 +27,13 @@ export default function WorkersPage() {
 
     fetchUsers();
   }, []);
+
+  const handleDelete = async (id_user: number) => {
+    const res = await fetch(`/api/workers-delete/${id_user}`, {
+      method: "DELETE",
+    });
+    window.location.reload();
+  };
 
   return (
     <div className={style.container}>
@@ -56,6 +64,12 @@ export default function WorkersPage() {
               <p>
                 <strong>Team:</strong> {user.id_team}
               </p>
+              <div>
+                <EditWorker />
+                <button onClick={() => handleDelete(user.id_user)}>
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         )}
