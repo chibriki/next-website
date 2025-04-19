@@ -1,28 +1,36 @@
-"use client"; // This is important to mark the component as a client-side component
-
+"use client"; 
 import { useState } from "react";
-import { userValidation } from "./actions"; // safe, it's a server action
+import { userValidation } from "./actions";
 import style from "./LoginForm.module.scss";
-import { useRouter } from "next/navigation"; // Make sure to use the correct import for the router
+import { useRouter } from "next/navigation";
+import { setCookie } from 'cookies-next';
 
 export const LoginForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [role, setRole] = useState<string | null>(null); // Store user role globally after login
-  const router = useRouter(); // Initialize useRouter for client-side navigation
+  const [role, setRole] = useState<string | null>(null); 
+  const router = useRouter(); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      // Destructure the result correctly based on the array returned
       const [isLoggedIn, permission] = await userValidation(login, password);
 
       if (isLoggedIn) {
-        setRole(permission as string); // Save the role (admin/user) to state
+        setRole(permission as string);
         console.log("Logged in with role:", permission);
-        router.push("/"); // Perform redirection to home or any other route after successful login
+        
+
+        setCookie('userRole', permission, {
+          maxAge: 60 * 60,
+          path: '/',
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict'
+        });
+        
+        router.push("/");
       } else {
         setError(
           typeof permission === "string" ? permission : "Invalid credentials."

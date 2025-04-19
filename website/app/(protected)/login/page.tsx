@@ -16,7 +16,7 @@ export default function LoginPage() {
         <div className={styles.header_title}>- LOGIN PAGE -</div>
         <div className={styles.user_image_section}>
           <div className={styles.user_image_container}>
-            <Image src="/user_image.jpg" alt="User" width={50} height={50} className={styles.user_image} />
+            <Image src="/user_image.svg" alt="User" width={50} height={50} className={styles.user_image} />
             <div className={styles.tooltip}>Not logged in</div>
           </div>
         </div>
