@@ -1,18 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
-import style from "./AddWorker.module.scss";
+import style from "./EditWorker.module.scss";
 
-export const AddWorker = () => {
+type EditWorkerProps = {
+  worker: {
+    id_user: number;
+    username: string;
+    position: string;
+    name: string;
+    role: string;
+    phone_number: string | null;
+    id_team: number;
+  };
+};
+
+export const EditWorker = ({ worker }: EditWorkerProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  if (!worker) return null;
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    position: "",
-    name: "",
-    role: "",
-    phone_number: "",
-    id_team: "",
+    username: worker.username,
+    position: worker.position,
+    name: worker.name,
+    role: worker.role,
+    phone_number: worker.phone_number || "",
+    id_team: String(worker.id_team),
   });
 
   const handleChange = (
@@ -24,10 +36,8 @@ export const AddWorker = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("Form Data Submitted:", formData);
-
-    const res = await fetch("/api/add-worker", {
-      method: "POST",
+    const res = await fetch(`/api/workers-manipulation/${worker.id_user}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -41,31 +51,27 @@ export const AddWorker = () => {
   return (
     <div>
       <button onClick={() => setIsModalOpen(true)} className={style.button}>
-        Add Worker
+        Edit
       </button>
 
       {isModalOpen && (
-        <div>
+        <div className={style.modalOverlay}>
           <div className={style.formContainer}>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="username"
                 placeholder="Username"
+                value={formData.username}
                 required
                 onChange={handleChange}
               />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
+              <select
+                name="position"
                 required
+                value={formData.position}
                 onChange={handleChange}
-              />
-              <select name="position" required onChange={handleChange}>
-                <option value="" disabled selected>
-                  Select Role
-                </option>
+              >
                 <option value="MECHANIC">Mechanic</option>
                 <option value="HEAD_MECHANIC">Head Mechanic</option>
               </select>
@@ -74,12 +80,15 @@ export const AddWorker = () => {
                 name="name"
                 placeholder="Full Name"
                 required
+                value={formData.name}
                 onChange={handleChange}
               />
-              <select name="role" required onChange={handleChange}>
-                <option value="" disabled selected>
-                  Select Role
-                </option>
+              <select
+                name="role"
+                required
+                value={formData.role}
+                onChange={handleChange}
+              >
                 <option value="ADMIN">Admin</option>
                 <option value="WORKER">Worker</option>
               </select>
@@ -87,17 +96,20 @@ export const AddWorker = () => {
                 type="tel"
                 name="phone_number"
                 placeholder="Phone Number"
+                value={formData.phone_number}
                 onChange={handleChange}
               />
-              <select name="id_team" required onChange={handleChange}>
-                <option value="" disabled selected>
-                  Select Team
-                </option>
+              <select
+                name="id_team"
+                required
+                value={formData.id_team}
+                onChange={handleChange}
+              >
                 <option value="1">Team #1</option>
                 <option value="2">Team #2</option>
               </select>
 
-              <button type="submit">Submit</button>
+              <button type="submit">Save Changes</button>
               <button type="button" onClick={() => setIsModalOpen(false)}>
                 Cancel
               </button>
