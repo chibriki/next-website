@@ -6,12 +6,13 @@ import { AddWorker } from "@/app/сomponents/AddWorker/AddWorker";
 import { EditWorker } from "@/app/сomponents/EditWorker/EditWorker";
 
 type User = {
+  username: string;
   id_user: number;
   name: string;
   position: string;
   role: string;
   phone_number: string;
-  id_team: string;
+  id_team: number;
 };
 
 export default function WorkersPage() {
@@ -65,8 +66,11 @@ export default function WorkersPage() {
                 <strong>Team:</strong> {user.id_team}
               </p>
               <div>
-                <EditWorker />
-                <button onClick={() => handleDelete(user.id_user)}>
+                <EditWorker user={user} />
+                <button
+                  className={style.button}
+                  onClick={() => handleDelete(user.id_user)}
+                >
                   Delete
                 </button>
               </div>

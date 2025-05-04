@@ -12,7 +12,6 @@ export async function DELETE(req: NextRequest, props : {params: Promise<{ id: st
       where: { id_user: Number(id) },
     });
     return NextResponse.json({ message: "User deleted successfully" }, { status: 200 });
-    window.location.reload();
   } catch (error: any) {
     if (error.code === 'P2025') {
       return NextResponse.json({ error: 'Worker not found' }, { status: 404 });

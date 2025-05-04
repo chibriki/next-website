@@ -4,27 +4,27 @@ import React, { useState } from "react";
 import style from "./EditWorker.module.scss";
 
 type EditWorkerProps = {
-  worker: {
+  user: {
     id_user: number;
     username: string;
     position: string;
     name: string;
     role: string;
-    phone_number: string | null;
+    phone_number: string;
     id_team: number;
   };
 };
 
-export const EditWorker = ({ worker }: EditWorkerProps) => {
+export const EditWorker = ({ user }: EditWorkerProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  if (!worker) return null;
+  if (!user) return null;
   const [formData, setFormData] = useState({
-    username: worker.username,
-    position: worker.position,
-    name: worker.name,
-    role: worker.role,
-    phone_number: worker.phone_number || "",
-    id_team: String(worker.id_team),
+    username: user.username,
+    position: user.position,
+    name: user.name,
+    role: user.role,
+    phone_number: user.phone_number || "",
+    id_team: String(user.id_team),
   });
 
   const handleChange = (
@@ -36,7 +36,7 @@ export const EditWorker = ({ worker }: EditWorkerProps) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await fetch(`/api/workers-manipulation/${worker.id_user}`, {
+    const res = await fetch(`/api/workers-edit/${user.id_user}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

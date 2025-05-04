@@ -17,14 +17,14 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); // dark overlay
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 
   form {
-    background-color: #575c5c; // teal background like your screenshot
+    background-color: #575c5c;
     padding: 2rem;
     border-radius: 12px;
     display: flex;

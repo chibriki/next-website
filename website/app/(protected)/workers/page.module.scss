@@ -34,8 +34,9 @@
 }
 
 .worker_card {
+  position: relative;
   border: 1px solid #ccc;
-  padding: 1rem;
+  padding: 3rem 1rem 1rem 1rem;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 0.5rem;
 
@@ -43,4 +44,27 @@
     margin: 0.2rem 0;
     font-size: 0.9rem;
   }
+
+  > div {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #4f5358;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: background 0.3s ease;
+}
+.button:hover {
+  background-color: rgb(26, 26, 26);
 }
