@@ -1,0 +1,46 @@
+.container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  width: 78%;
+  height: 92%;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.liftCard {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+}
+
+.liftHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggleBtn {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.toggleBtn:hover {
+  background-color: #005bb5;
+}
+
+.projectList {
+  margin-top: 1rem;
+  padding-left: 1rem;
+}
