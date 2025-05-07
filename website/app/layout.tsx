@@ -45,13 +45,7 @@ export default function RootLayout({
               <div>Workers</div>
             </div>
 
-            <div
-              className="sidebar_link"
-              onClick={() =>
-                (window.location.href =
-                  "https://www.youtube.com/watch?v=FQtPSH2ibYQ")
-              }
-            >
+            <div className="sidebar_link" onClick={() => router.push("/chat")}>
               <img src="/home.svg" />
               <div>General Chat</div>
             </div>

@@ -50,9 +50,6 @@ export default function WorkersPage() {
           users.map((user) => (
             <div key={user.id_user} className={style.worker_card}>
               <p>
-                <strong>Name:</strong> {user.name}
-              </p>
-              <p>
                 <strong>Position:</strong> {user.position}
               </p>
               <p>
@@ -66,13 +63,18 @@ export default function WorkersPage() {
                 <strong>Team:</strong> {user.id_team}
               </p>
               <div>
-                <EditWorker user={user} />
-                <button
-                  className={style.button}
-                  onClick={() => handleDelete(user.id_user)}
-                >
-                  Delete
-                </button>
+                <p>
+                  <strong>Name:</strong> {user.name}
+                </p>
+                <div className={style.buttons_container}>
+                  <EditWorker user={user} />
+                  <button
+                    className={style.button}
+                    onClick={() => handleDelete(user.id_user)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           ))

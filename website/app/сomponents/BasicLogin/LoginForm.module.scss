@@ -1,39 +1,38 @@
-
 .input_place {
-    height: 30px;
-    width: 227px;
-    background-color: rgb(82, 83, 83);
-    margin-right: 20px;
-    border-radius: 5px;
-    border-style: solid;
-    padding-left: 15px;
-  }
-  
-  .select_position {
-    height: 32px;
-    width: 248px;
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 2px;
-    margin-right: 20px;
-  }
-  
-  .button_login {
-    padding: 8px 40px 8px 40px;
-    border-radius: 5px;
-    background-color: #334259;
-    color: white;
-    border-style: none;
-    font-weight: bold;
-    font-size: 16px;
-    margin-left: 190px;
-    margin-top: 15px;
-    transform: translateX(-100%);
-  }
-  
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-  }
+  height: 30px;
+  width: 227px;
+  background-color: rgb(82, 83, 83);
+  margin-right: 20px;
+  border-radius: 5px;
+  border-style: solid;
+  padding-left: 15px;
+}
+
+.select_position {
+  height: 32px;
+  width: 248px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  margin-right: 20px;
+}
+
+.button_login {
+  padding: 8px 40px 8px 40px;
+  border-radius: 5px;
+  background-color: #334259;
+  color: white;
+  border-style: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 190px;
+  margin-top: 15px;
+  transform: translateX(-100%);
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}

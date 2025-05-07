@@ -14,7 +14,7 @@ export async function POST(req: Request) {
         name: body.name,
         role: body.role as Role,
         phone_number: body.phone_number || null,
-        id_team: body.id_team ? parseInt(body.id_team, 10) : null,
+        id_team: parseInt(body.id_team, 10)
       },
     });
 

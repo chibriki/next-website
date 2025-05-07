@@ -1,39 +1,51 @@
-"use client"; 
+"use client";
 import { useState } from "react";
 import { userValidation } from "./actions";
 import style from "./LoginForm.module.scss";
 import { useRouter } from "next/navigation";
-import { setCookie } from 'cookies-next';
+import { setCookie } from "cookies-next";
 
 export const LoginForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [role, setRole] = useState<string | null>(null); 
-  const router = useRouter(); 
+  const [role, setRole] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const [isLoggedIn, permission] = await userValidation(login, password);
+      const [isLoggedIn, userInfo] = await userValidation(login, password);
 
-      if (isLoggedIn) {
-        setRole(permission as string);
-        console.log("Logged in with role:", permission);
-        
+      if (isLoggedIn && typeof userInfo === "object") {
+        const { user_role, id_user, id_team } = userInfo;
+        setRole(user_role as string);
 
-        setCookie('userRole', permission, {
+        setCookie("userRole", user_role, {
           maxAge: 60 * 60,
-          path: '/',
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'strict'
+          path: "/",
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
         });
-        
-        router.push("/");
+
+        setCookie("id_user", id_user.toString(), {
+          maxAge: 60 * 60,
+          path: "/",
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        });
+
+        setCookie("id_team", id_team.toString(), {
+          maxAge: 60 * 60,
+          path: "/",
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        });
+        router.push("/projects");
       } else {
         setError(
-          typeof permission === "string" ? permission : "Invalid credentials."
+          typeof userInfo === "string" ? userInfo : "Invalid credentials."
         );
       }
     } catch (err) {

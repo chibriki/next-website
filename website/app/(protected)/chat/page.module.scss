@@ -1,0 +1,48 @@
+.chatContainer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  width: 78%;
+  height: 92%;
+}
+
+.messages {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  flex: 1;
+  height: 80%;
+  padding: 16px;
+  overflow-y: scroll;
+  background: #f9f9f9;
+}
+
+.message {
+  margin-bottom: 12px;
+}
+
+.inputContainer {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 12px;
+  background: white;
+
+  textarea {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+}

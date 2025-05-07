@@ -73,18 +73,17 @@ model Projects {
 }
 
 model Chat {
-  id_chat    Int       @id @default(autoincrement()) // Primary key
-  id_team    Int       @unique // Foreign key referencing Team(id_team), unique to ensure one chat per team
-  team       Team      @relation(fields: [id_team], references: [id_team])
-  messages   Message[]
-  created_at DateTime  @default(now())
+  id_chat  Int       @id @default(autoincrement()) // Primary key
+  id_team  Int       @unique // Foreign key referencing Team(id_team), unique to ensure one chat per team
+  team     Team      @relation(fields: [id_team], references: [id_team])
+  messages Message[]
 }
 
 model Message {
   id_message Int      @id @default(autoincrement()) // Primary key
   id_chat    Int
   id_user    Int
-  content    String
+  content    String   @db.Text
   created_at DateTime @default(now())
   chat       Chat     @relation(fields: [id_chat], references: [id_chat])
   user       User     @relation(fields: [id_user], references: [id_user])

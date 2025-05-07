@@ -11,7 +11,7 @@ export async function loginValidation(username: string, password: string) {
 
   const valid = user.password === password;
   if (valid) {
-    return [true, user.role]; 
+    return [true, {user_role: user.role, id_user: user.id_user, id_team: user.id_team}]; 
   } else {
     return [false, 'Invalid password'];
   }
