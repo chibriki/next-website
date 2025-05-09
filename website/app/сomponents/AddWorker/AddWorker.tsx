@@ -69,6 +69,8 @@ export const AddWorker = () => {
                 </option>
                 <option value="MECHANIC">Mechanic</option>
                 <option value="HEAD_MECHANIC">Head Mechanic</option>
+                <option value="LOCKSMITH">Locksmith</option>
+                <option value="SHIFT_MANAGER">Shift Manager</option>
               </select>
               <input
                 type="text"

@@ -8,7 +8,7 @@ interface Project {
   name_project: string;
   status: StatusProject;
   start_date: Date;
-  end_date: Date | null;
+  end_date: Date;
   description: string | null;
   id_lift: number;
   id_team: number;
@@ -16,9 +16,13 @@ interface Project {
 
 interface ProjectsTableProps {
   onEditProject: (project: Project) => void;
+  userRole: string | null;
 }
 
-export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
+export default function ProjectsTable({
+  onEditProject,
+  userRole,
+}: ProjectsTableProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -53,7 +57,10 @@ export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
     onEditProject(project);
   };
 
-  const handleDeleteClick = async (e: React.MouseEvent, project: Project) => {
+  const handleDeleteClick = async (
+    e: React.MouseEvent | Event,
+    project: Project
+  ) => {
     e.stopPropagation();
 
     if (
@@ -78,17 +85,11 @@ export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
     }
   };
 
-  if (isLoading) {
+  if (isLoading)
     return <div className={styles.loading}>Loading projects...</div>;
-  }
-
-  if (error) {
-    return <div className={styles.error}>{error}</div>;
-  }
-
-  if (projects.length === 0) {
+  if (error) return <div className={styles.error}>{error}</div>;
+  if (projects.length === 0)
     return <div className={styles.empty}>No projects found</div>;
-  }
 
   return (
     <div className={styles.tableLayout}>
@@ -104,7 +105,7 @@ export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
               <th>Description</th>
               <th>Lift ID</th>
               <th>Team ID</th>
-              <th>Actions</th>
+              {userRole === "ADMIN" && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>
@@ -138,24 +139,26 @@ export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
                 <td>{project.description || "-"}</td>
                 <td>{project.id_lift}</td>
                 <td>{project.id_team}</td>
-                <td>
-                  <div className={styles.actions}>
-                    <button
-                      className={styles.editButton}
-                      onClick={(e) => handleEditClick(e, project)}
-                      disabled={isDeleting}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className={styles.deleteButton}
-                      onClick={(e) => handleDeleteClick(e, project)}
-                      disabled={isDeleting}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
+                {userRole === "ADMIN" && (
+                  <td>
+                    <div className={styles.actions}>
+                      <button
+                        className={styles.editButton}
+                        onClick={(e) => handleEditClick(e, project)}
+                        disabled={isDeleting}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className={styles.deleteButton}
+                        onClick={(e) => handleDeleteClick(e, project)}
+                        disabled={isDeleting}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
@@ -167,6 +170,7 @@ export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
           <div className={styles.projectInfoHeader}>
             <h2>{selectedProject.name_project}</h2>
             <p>Project ID: {selectedProject.id_project}</p>
+
             <div className={styles.projectInfoActions}>
               <button
                 className={styles.editButton}
@@ -174,15 +178,20 @@ export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
               >
                 Edit Project
               </button>
-              <button
-                className={styles.deleteButton}
-                onClick={() =>
-                  handleDeleteClick(new Event("click") as any, selectedProject)
-                }
-                disabled={isDeleting}
-              >
-                Delete Project
-              </button>
+              {userRole === "ADMIN" && (
+                <button
+                  className={styles.deleteButton}
+                  onClick={() =>
+                    handleDeleteClick(
+                      new Event("click") as any,
+                      selectedProject
+                    )
+                  }
+                  disabled={isDeleting}
+                >
+                  Delete Project
+                </button>
+              )}
             </div>
           </div>
 

@@ -10,7 +10,7 @@ interface Project {
   name_project: string;
   status: StatusProject;
   start_date: Date;
-  end_date: Date | null;
+  end_date: Date;
   description: string | null;
   id_lift: number;
   id_team: number;
@@ -31,7 +31,6 @@ export default function EditProject({
 }: EditModalProps) {
   const [formData, setFormData] = useState({
     name_project: "",
-    status: "",
     start_date: new Date(),
     end_date: new Date(),
     description: "",
@@ -41,14 +40,12 @@ export default function EditProject({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Update form data when project changes
   useEffect(() => {
     if (project) {
       setFormData({
         name_project: project.name_project,
-        status: project.status,
         start_date: new Date(project.start_date),
-        end_date: project.end_date ? new Date(project.end_date) : new Date(),
+        end_date: new Date(project.end_date),
         description: project.description || "",
         id_lift: project.id_lift,
         id_team: project.id_team,
@@ -89,25 +86,20 @@ export default function EditProject({
     setError(null);
 
     try {
-      // Create a FormData object to pass to the server action
       const formDataObj = new FormData();
       formDataObj.append("name_project", formData.name_project);
-      formDataObj.append("status", formData.status);
       formDataObj.append("start_date", formData.start_date.toISOString());
       formDataObj.append("end_date", formData.end_date.toISOString());
       formDataObj.append("description", formData.description);
       formDataObj.append("id_lift", formData.id_lift.toString());
       formDataObj.append("id_team", formData.id_team.toString());
 
-      // Call the server action
       const updatedProject = await updateProject(
         project.id_project,
         formDataObj
       );
 
-      // Pass the updated project data to the parent component
       onSubmit(updatedProject);
-
       onClose();
     } catch (err) {
       console.error("Failed to update project:", err);
@@ -115,6 +107,7 @@ export default function EditProject({
     } finally {
       setIsSubmitting(false);
     }
+
     window.location.reload();
   };
 
@@ -133,23 +126,9 @@ export default function EditProject({
             required
           />
 
-          <select
-            id="status"
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-          >
-            {Object.values(StatusProject).map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-
-          <label htmlFor="end_date">Start Date:</label>
+          <label htmlFor="start_date">Start Date:</label>
           <input
             type="date"
-            placeholder="Start date"
             id="start_date"
             name="start_date"
             value={formData.start_date.toISOString().split("T")[0]}
@@ -160,7 +139,6 @@ export default function EditProject({
           <label htmlFor="end_date">End Date:</label>
           <input
             type="date"
-            placeholder="End date"
             id="end_date"
             name="end_date"
             value={formData.end_date.toISOString().split("T")[0]}
@@ -176,6 +154,7 @@ export default function EditProject({
             onChange={handleChange}
           />
 
+          <label htmlFor="id_lift">Enter lift ID:</label>
           <input
             type="number"
             placeholder="Lift ID"

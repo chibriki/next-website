@@ -13,7 +13,8 @@ enum Role {
 }
 
 enum Position {
-  FILTER
+  SHIFT_MANAGER
+  LOCKSMITH
   MECHANIC
   HEAD_MECHANIC
 }
@@ -51,11 +52,12 @@ model User {
 }
 
 model Lifts {
-  id_lift   Int        @id @default(autoincrement())
-  name_lift String     @unique
-  status    StatusLift
-  end_date  DateTime?
-  projects  Projects[] // No need for an explicit foreign key here
+  id_lift          Int        @id @default(autoincrement())
+  name_lift        String     @unique
+  status           StatusLift
+  end_date         DateTime?
+  last_maintenance DateTime?
+  projects         Projects[] // No need for an explicit foreign key here
 }
 
 model Projects {

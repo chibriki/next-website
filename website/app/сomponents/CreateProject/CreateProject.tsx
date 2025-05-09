@@ -3,14 +3,12 @@
 import { useState } from "react";
 import styles from "./CreateProject.module.scss";
 import { createProject } from "@/app/lib/project";
-import { StatusProject } from "@prisma/client";
 
 interface CreateModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (projectData: {
     name_project: string;
-    status: StatusProject;
     start_date: Date;
     end_date: Date;
     description?: string;
@@ -26,7 +24,6 @@ export default function CreateModal({
 }: CreateModalProps) {
   const [formData, setFormData] = useState({
     name_project: "",
-    status: StatusProject.ONGOING,
     start_date: new Date(),
     end_date: new Date(),
     description: "",
@@ -42,7 +39,6 @@ export default function CreateModal({
       // Create a FormData object to pass to the server action
       const formDataObj = new FormData();
       formDataObj.append("name_project", formData.name_project);
-      formDataObj.append("status", formData.status);
       formDataObj.append("start_date", formData.start_date.toISOString());
       formDataObj.append("end_date", formData.end_date.toISOString());
       formDataObj.append("description", formData.description);
@@ -93,19 +89,6 @@ export default function CreateModal({
             required
           />
 
-          <select
-            id="status"
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-          >
-            {Object.values(StatusProject).map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-
           <label htmlFor="end_date">Start Date:</label>
           <input
             type="date"
@@ -136,6 +119,7 @@ export default function CreateModal({
             onChange={handleChange}
           />
 
+          <label htmlFor="id_lift">Enter lift ID:</label>
           <input
             type="number"
             id="id_lift"
@@ -146,8 +130,13 @@ export default function CreateModal({
             required
           />
 
-          <select name="id_team" required onChange={handleChange}>
-            <option value="" disabled selected>
+          <select
+            name="id_team"
+            value={formData.id_team === 0 ? "" : formData.id_team}
+            required
+            onChange={handleChange}
+          >
+            <option value="" disabled>
               Select Team
             </option>
             <option value="1">Team #1</option>

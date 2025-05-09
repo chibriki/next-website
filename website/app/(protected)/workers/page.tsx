@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import style from "./page.module.scss";
@@ -19,6 +20,7 @@ type User = {
 export default function WorkersPage() {
   const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
+  const [userRole, setUserRole] = useState<string>("worker"); // default to "worker"
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -27,15 +29,29 @@ export default function WorkersPage() {
       setUsers(data);
     };
 
+    // Parse document.cookie using custom logic
+    const cookies = document.cookie
+      .split("; ")
+      .reduce((acc: any, cookieStr) => {
+        const [key, value] = cookieStr.split("=");
+        acc[key] = value;
+        return acc;
+      }, {});
+    const role = cookies["userRole"];
+    setUserRole(role ?? "worker");
+
     fetchUsers();
   }, []);
 
   const handleDelete = async (id_user: number) => {
-    if (window.confirm(`Are you sure you want to delete this user?`)) {
-      const res = await fetch(`/api/workers-delete/${id_user}`, {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (confirmed) {
+      await fetch(`/api/workers-delete/${id_user}`, {
         method: "DELETE",
       });
-      window.location.reload();
+      router.refresh();
     }
   };
 
@@ -50,12 +66,12 @@ export default function WorkersPage() {
     <div className={style.container}>
       <div className={style.top_bar}>
         <h1>Workers</h1>
-        <AddWorker />
+        {userRole === "ADMIN" && <AddWorker />}
       </div>
 
       <div className={style.scroll_container}>
         {users.length === 0 ? (
-          <p style={{ color: "#fff" }}>Loading data..</p>
+          <p style={{ color: "#fff" }}>Loading data...</p>
         ) : (
           users.map((user) => (
             <div key={user.id_user} className={style.worker_card}>
@@ -66,25 +82,28 @@ export default function WorkersPage() {
                 <strong>Role:</strong> {formatLabel(user.role)}
               </p>
               <p>
-                <strong>Phone:</strong>{" "}
-                {user.phone_number !== null ? user.phone_number : "none"}
+                <strong>Phone:</strong> {user.phone_number || "none"}
               </p>
               <p>
                 <strong>Team:</strong> {user.id_team}
               </p>
+
               <div>
                 <p>
                   <strong>Name:</strong> {user.name}
                 </p>
-                <div className={style.buttons_container}>
-                  <EditWorker user={user} />
-                  <button
-                    className={style.button}
-                    onClick={() => handleDelete(user.id_user)}
-                  >
-                    Delete
-                  </button>
-                </div>
+
+                {userRole === "ADMIN" && (
+                  <div className={style.buttons_container}>
+                    <EditWorker user={user} />
+                    <button
+                      className={style.button}
+                      onClick={() => handleDelete(user.id_user)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           ))
