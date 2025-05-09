@@ -1,4 +1,4 @@
-.modalOverlay {
+.formContainer {
   position: fixed;
   top: 0;
   left: 0;
@@ -9,56 +9,46 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-}
-
-.modalContent {
-  background-color: #575c5c;
-  padding: 2rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  max-width: 420px;
-  gap: 1rem;
 
   h2 {
     color: white;
     margin-bottom: 1rem;
+    font-size: 20px;
+    font-weight: bolt;
+    text-align: center;
   }
-
-  input,
-  select,
-  textarea {
-    background-color: #2c2c2c;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    color: #fff;
-    font-size: 1rem;
-
-    &::placeholder {
-      color: #aaa;
-    }
-  }
-
-  select {
-    appearance: none;
-  }
-
-  .formGroup {
+  form {
+    background-color: #575c5c;
+    padding: 2rem;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    width: 90%;
+    max-width: 420px;
+    gap: 1rem;
 
     label {
       color: white;
     }
-  }
 
-  .buttonGroup {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    input,
+    select,
+    textarea {
+      background-color: #2c2c2c;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-size: 1rem;
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+
+    select {
+      appearance: none;
+    }
 
     button[type="submit"] {
       background-color: #007aff;

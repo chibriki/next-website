@@ -20,13 +20,12 @@ enum Position {
 
 enum StatusLift {
   IN_SERVICE
-  WAITING
-  COMPLETE
+  IN_MAINTENANCE
 }
 
 enum StatusProject {
   COMPLETE
-  STOPPED
+  PLANNED
   ONGOING
 }
 
@@ -74,8 +73,8 @@ model Projects {
 
 model Chat {
   id_chat  Int       @id @default(autoincrement()) // Primary key
-  id_team  Int       @unique // Foreign key referencing Team(id_team), unique to ensure one chat per team
-  team     Team      @relation(fields: [id_team], references: [id_team])
+  id_team  Int?      @unique // Foreign key referencing Team(id_team), unique to ensure one chat per team
+  team     Team?     @relation(fields: [id_team], references: [id_team])
   messages Message[]
 }
 

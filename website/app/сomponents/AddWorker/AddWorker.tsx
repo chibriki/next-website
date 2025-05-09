@@ -48,6 +48,7 @@ export const AddWorker = () => {
         <div>
           <div className={style.formContainer}>
             <form onSubmit={handleSubmit}>
+              <h2>Add Worker</h2>
               <input
                 type="text"
                 name="username"

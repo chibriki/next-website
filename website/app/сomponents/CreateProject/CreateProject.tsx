@@ -1,93 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import styles from "./EditProject.module.scss";
-import { updateProject } from "../../lib/project";
+import { useState } from "react";
+import styles from "./CreateProject.module.scss";
+import { createProject } from "@/app/lib/project";
 import { StatusProject } from "@prisma/client";
 
-interface Project {
-  id_project: number;
-  name_project: string;
-  status: StatusProject;
-  start_date: Date;
-  end_date: Date | null;
-  description: string | null;
-  id_lift: number;
-  id_team: number;
-}
-
-interface EditModalProps {
+interface CreateModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (projectData: Project) => void;
-  project: Project | null;
+  onSubmit: (projectData: {
+    name_project: string;
+    status: StatusProject;
+    start_date: Date;
+    end_date: Date;
+    description?: string;
+    id_lift: number;
+    id_team: number;
+  }) => void;
 }
 
-export default function EditProject({
+export default function CreateModal({
   isOpen,
   onClose,
   onSubmit,
-  project,
-}: EditModalProps) {
+}: CreateModalProps) {
   const [formData, setFormData] = useState({
     name_project: "",
-    status: "",
+    status: StatusProject.ONGOING,
     start_date: new Date(),
     end_date: new Date(),
     description: "",
     id_lift: 0,
     id_team: 0,
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  // Update form data when project changes
-  useEffect(() => {
-    if (project) {
-      setFormData({
-        name_project: project.name_project,
-        status: project.status,
-        start_date: new Date(project.start_date),
-        end_date: project.end_date ? new Date(project.end_date) : new Date(),
-        description: project.description || "",
-        id_lift: project.id_lift,
-        id_team: project.id_team,
-      });
-    }
-  }, [project]);
-
-  if (!isOpen || !project) return null;
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.target;
-
-    if (name === "start_date" || name === "end_date") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: new Date(value),
-      }));
-    } else if (name === "id_lift" || name === "id_team") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: Number(value),
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-  };
+  if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-
     try {
       // Create a FormData object to pass to the server action
       const formDataObj = new FormData();
@@ -100,29 +50,39 @@ export default function EditProject({
       formDataObj.append("id_team", formData.id_team.toString());
 
       // Call the server action
-      const updatedProject = await updateProject(
-        project.id_project,
-        formDataObj
-      );
+      const savedProject = await createProject(formDataObj);
 
-      // Pass the updated project data to the parent component
-      onSubmit(updatedProject);
+      // Pass the project data to the parent component
+      onSubmit({
+        ...savedProject,
+        description: savedProject.description || undefined,
+      });
 
       onClose();
-    } catch (err) {
-      console.error("Failed to update project:", err);
-      setError("Failed to update project. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+    } catch (error) {
+      console.error("Failed to create project:", error);
+      throw new Error("Failed to create project");
     }
     window.location.reload();
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name.includes("date") ? new Date(value) : value,
+    }));
   };
 
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit}>
-          <h2>Edit Project</h2>
+          <h2>Create New Project</h2>
           <input
             type="text"
             placeholder="Project name"
@@ -149,9 +109,9 @@ export default function EditProject({
           <label htmlFor="end_date">Start Date:</label>
           <input
             type="date"
-            placeholder="Start date"
             id="start_date"
             name="start_date"
+            placeholder="Start date"
             value={formData.start_date.toISOString().split("T")[0]}
             onChange={handleChange}
             required
@@ -160,9 +120,9 @@ export default function EditProject({
           <label htmlFor="end_date">End Date:</label>
           <input
             type="date"
-            placeholder="End date"
             id="end_date"
             name="end_date"
+            placeholder="End date"
             value={formData.end_date.toISOString().split("T")[0]}
             onChange={handleChange}
             required
@@ -170,40 +130,32 @@ export default function EditProject({
 
           <textarea
             id="description"
-            placeholder="Description"
             name="description"
+            placeholder="Description"
             value={formData.description}
             onChange={handleChange}
           />
 
           <input
             type="number"
-            placeholder="Lift ID"
             id="id_lift"
             name="id_lift"
+            placeholder="Lift ID"
             value={formData.id_lift}
             onChange={handleChange}
             required
           />
 
-          <select
-            name="id_team"
-            required
-            value={formData.id_team}
-            onChange={handleChange}
-          >
+          <select name="id_team" required onChange={handleChange}>
+            <option value="" disabled selected>
+              Select Team
+            </option>
             <option value="1">Team #1</option>
             <option value="2">Team #2</option>
           </select>
 
-          <button
-            type="submit"
-            className={styles.saveButton}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Saving..." : "Save Changes"}
-          </button>
-          <button type="button" onClick={onClose} disabled={isSubmitting}>
+          <button type="submit">Create Project</button>
+          <button type="button" onClick={onClose}>
             Cancel
           </button>
         </form>

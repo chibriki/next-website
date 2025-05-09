@@ -7,6 +7,7 @@ import { EditWorker } from "@/app/сomponents/EditWorker/EditWorker";
 
 type User = {
   username: string;
+  password: string;
   id_user: number;
   name: string;
   position: string;
@@ -30,10 +31,19 @@ export default function WorkersPage() {
   }, []);
 
   const handleDelete = async (id_user: number) => {
-    const res = await fetch(`/api/workers-delete/${id_user}`, {
-      method: "DELETE",
-    });
-    window.location.reload();
+    if (window.confirm(`Are you sure you want to delete this user?`)) {
+      const res = await fetch(`/api/workers-delete/${id_user}`, {
+        method: "DELETE",
+      });
+      window.location.reload();
+    }
+  };
+
+  const formatLabel = (str: string) => {
+    return str
+      .replace(/_/g, " ")
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
   return (
@@ -50,10 +60,10 @@ export default function WorkersPage() {
           users.map((user) => (
             <div key={user.id_user} className={style.worker_card}>
               <p>
-                <strong>Position:</strong> {user.position}
+                <strong>Position:</strong> {formatLabel(user.position)}
               </p>
               <p>
-                <strong>Role:</strong> {user.role}
+                <strong>Role:</strong> {formatLabel(user.role)}
               </p>
               <p>
                 <strong>Phone:</strong>{" "}

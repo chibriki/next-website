@@ -138,21 +138,23 @@ export default function ProjectsTable({ onEditProject }: ProjectsTableProps) {
                 <td>{project.description || "-"}</td>
                 <td>{project.id_lift}</td>
                 <td>{project.id_team}</td>
-                <td className={styles.actions}>
-                  <button
-                    className={styles.editButton}
-                    onClick={(e) => handleEditClick(e, project)}
-                    disabled={isDeleting}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className={styles.deleteButton}
-                    onClick={(e) => handleDeleteClick(e, project)}
-                    disabled={isDeleting}
-                  >
-                    Delete
-                  </button>
+                <td>
+                  <div className={styles.actions}>
+                    <button
+                      className={styles.editButton}
+                      onClick={(e) => handleEditClick(e, project)}
+                      disabled={isDeleting}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={(e) => handleDeleteClick(e, project)}
+                      disabled={isDeleting}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

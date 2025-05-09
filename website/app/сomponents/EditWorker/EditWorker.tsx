@@ -7,6 +7,7 @@ type EditWorkerProps = {
   user: {
     id_user: number;
     username: string;
+    password: string;
     position: string;
     name: string;
     role: string;
@@ -20,6 +21,7 @@ export const EditWorker = ({ user }: EditWorkerProps) => {
   if (!user) return null;
   const [formData, setFormData] = useState({
     username: user.username,
+    password: user.password,
     position: user.position,
     name: user.name,
     role: user.role,
@@ -58,11 +60,20 @@ export const EditWorker = ({ user }: EditWorkerProps) => {
         <div className={style.modalOverlay}>
           <div className={style.formContainer}>
             <form onSubmit={handleSubmit}>
+              <h2>Edit Worker</h2>
               <input
                 type="text"
                 name="username"
-                placeholder="Username"
+                placeholder="New username"
                 value={formData.username}
+                required
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="password"
+                placeholder="New password"
+                value={formData.password}
                 required
                 onChange={handleChange}
               />
@@ -95,7 +106,7 @@ export const EditWorker = ({ user }: EditWorkerProps) => {
               <input
                 type="tel"
                 name="phone_number"
-                placeholder="Phone Number"
+                placeholder="New phone Number"
                 value={formData.phone_number}
                 onChange={handleChange}
               />

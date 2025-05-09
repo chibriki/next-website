@@ -1,7 +1,7 @@
 .button {
   padding: 0.5rem 1rem;
-  background-color: #4f5358;
-  color: white;
+  background-color: #e0f2fe;
+  color: #0284c7;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -10,7 +10,7 @@
   transition: background 0.3s ease;
 }
 .button:hover {
-  background-color: rgb(26, 26, 26);
+  background-color: #bae6fd;
 }
 
 .formContainer {
@@ -25,6 +25,13 @@
   align-items: center;
   z-index: 1000;
 
+  h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    font-weight: bolt;
+    text-align: center;
+  }
   form {
     background-color: #575c5c;
     padding: 2rem;

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ProjectsTable from "@/app/сomponents/ProjectsTable/ProjectsTable";
-import CreateModal from "@/app/сomponents/CreateProject/CreateModal";
+import CreateModal from "@/app/сomponents/CreateProject/CreateProject";
 import EditProject from "@/app/сomponents/EditProject/EditProject";
 import styles from "./page.module.scss";
 import { StatusProject } from "@prisma/client";
