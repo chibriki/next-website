@@ -1,187 +1,38 @@
-
-body {
-    background-image: url("/public/background_of_login_page.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
+.input_place {
+  height: 30px;
+  width: 227px;
+  background-color: rgb(82, 83, 83);
+  margin-right: 20px;
+  border-radius: 5px;
+  border-style: solid;
+  padding-left: 15px;
 }
 
-.headerOfLogin {
-    height: 60px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #334259;
+.select_position {
+  height: 32px;
+  width: 248px;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  margin-right: 20px;
 }
 
-.logoContainer {
-    display: flex;
-    height: 55px;
-    align-items: center;
-    justify-content: center;
+.button_login {
+  padding: 8px 40px 8px 40px;
+  border-radius: 5px;
+  background-color: #334259;
+  color: white;
+  border-style: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin-left: 190px;
+  margin-top: 15px;
+  transform: translateX(-100%);
 }
 
-.bkSystemLogo {
-    height: 60px;
-    margin-left: 20px;
-}
-
-.userImageSection {
-    width: 50px;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-shrink: 0;
-}
-
-/* Tooltip for user image */
-.userImageContainer {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.userImageContainer .tooltip {
-    position: absolute;
-    background-color: #8a8787;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 2px;
-    font-size: 14px;
-    bottom: -36px;
-    right: 8px;
-    opacity: 0;
-    transition: opacity 0.2s;
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-/* Info tooltip */
-.infoImageContainer .tooltipInfo {
-    position: absolute;
-    background-color: rgba(178, 178, 178, 0.58);
-    color: white;
-    padding: 4px 8px;
-    left: 70px;
-    border-radius: 2px;
-    font-size: 16px;
-    opacity: 0;
-    transition: opacity 0.2s;
-    pointer-events: none;
-}
-
-/* Show tooltips on hover */
-.userImageContainer:hover .tooltip,
-.infoImageContainer:hover .tooltipInfo {
-    opacity: 1;
-}
-
-/* User image styles */
-.userImage {
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 20px;
-}
-
-.headerTitle {
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-/* Main login container */
-.loginContainer {
-    background-color: rgba(243, 243, 243, 0.84);
-    border-radius: 10px;
-    padding: 22px 50px;
-    height: 320px;
-}
-
-.mainText {
-    display: flex;
-    justify-content: center;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 24px;
-}
-
-/* Central alignment for the form */
-.centralContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 200px;
-}
-
-/* Form section styles */
-.section {
-    width: 450px;
-    padding: 12px 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-label {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.inputPlace {
-    height: 30px;
-    width: 227px;
-    margin-right: 20px;
-    border-radius: 5px;
-    border-style: solid;
-    padding-left: 15px;
-}
-
-.selectPosition {
-    height: 32px;
-    width: 248px;
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 2px;
-    margin-right: 20px;
-}
-
-/* Button styles */
-.buttonLogin {
-    padding: 8px 40px;
-    border-radius: 5px;
-    background-color: #334259;
-    color: white;
-    border: none;
-    font-weight: bold;
-    font-size: 16px;
-    margin-left: 190px;
-    margin-top: 15px;
-}
-
-.buttonLogin:hover {
-    cursor: pointer;
-}
-
-/* Info image styling */
-.infoImage {
-    height: 55px;
-    border-radius: 50%;
-    opacity: 0.75;
-}
-
-/* Bottom section */
-.bottomContainer {
-    margin-top: 150px;
-    margin-bottom: 50px;
-    display: flex;
-    height: 55px;
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
 }

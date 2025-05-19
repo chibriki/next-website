@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  WORKER
+}
+
+enum Position {
+  SHIFT_MANAGER
+  LOCKSMITH
+  MECHANIC
+  HEAD_MECHANIC
+}
+
+enum StatusLift {
+  IN_SERVICE
+  IN_MAINTENANCE
+}
+
+enum StatusProject {
+  COMPLETE
+  PLANNED
+  ONGOING
+}
+
+model Team {
+  id_team  Int        @id @default(autoincrement()) // Primary key
+  name     String     @unique // Unique team name (e.g., "Team A", "Team B")
+  users    User[]
+  projects Projects[]
+  chat     Chat?
+}
+
+model User {
+  id_user      Int       @id @default(autoincrement()) // Primary key
+  username     String    @unique
+  password     String
+  position     Position
+  name         String
+  role         Role
+  phone_number String?
+  id_team      Int // Foreign key referencing Team(id_team)
+  team         Team      @relation(fields: [id_team], references: [id_team])
+  messages     Message[] // Messages sent by this user
+}
+
+model Lifts {
+  id_lift          Int        @id @default(autoincrement())
+  name_lift        String     @unique
+  status           StatusLift
+  end_date         DateTime?
+  last_maintenance DateTime?
+  projects         Projects[] // No need for an explicit foreign key here
+}
+
+model Projects {
+  id_project   Int           @id @default(autoincrement())
+  name_project String        @unique
+  status       StatusProject
+  start_date   DateTime
+  end_date     DateTime
+  description  String?
+  id_lift      Int // Foreign key referencing Lifts(id_lift)
+  id_team      Int // Foreign key referencing Team(id_team)
+  lift         Lifts         @relation(fields: [id_lift], references: [id_lift])
+  team         Team          @relation(fields: [id_team], references: [id_team])
+}
+
+model Chat {
+  id_chat  Int       @id @default(autoincrement()) // Primary key
+  id_team  Int?      @unique // Foreign key referencing Team(id_team), unique to ensure one chat per team
+  team     Team?     @relation(fields: [id_team], references: [id_team])
+  messages Message[]
+}
+
+model Message {
+  id_message Int      @id @default(autoincrement()) // Primary key
+  id_chat    Int
+  id_user    Int
+  content    String   @db.Text
+  created_at DateTime @default(now())
+  chat       Chat     @relation(fields: [id_chat], references: [id_chat])
+  user       User     @relation(fields: [id_user], references: [id_user])
+}

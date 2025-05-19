@@ -1,0 +1,242 @@
+.tableLayout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  height: 80%; // Adjust based on header/footer
+  overflow: hidden;
+}
+
+.tableContainer {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-height: 100%;
+}
+
+.projectsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-size: 0.9rem;
+
+  th,
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    height: 100%;
+  }
+
+  th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #475569;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  tr:hover {
+    background-color: #f1f5f9;
+    cursor: pointer;
+  }
+
+  .selectedRow {
+    background-color: #e0f2fe;
+    border-left: 4px solid #0284c7;
+  }
+
+  .status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .ongoing {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+
+  .completed {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+
+  .planned {
+    background-color: #f4c35a;
+    color: rgb(111, 105, 72);
+  }
+}
+
+.loading,
+.error,
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: #64748b;
+}
+
+.projectInfo {
+  flex: 0 1 350px;
+  max-width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  position: sticky;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.projectInfoHeader {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 0.875rem;
+  }
+}
+
+.projectInfoSection {
+  margin-bottom: 1.5rem;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 1rem;
+  }
+}
+
+.projectInfoItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+
+  span:first-child {
+    color: #64748b;
+    font-size: 0.875rem;
+  }
+
+  span:last-child {
+    color: #1e293b;
+    font-weight: 500;
+  }
+}
+
+.projectInfoStatus {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  &.ongoing {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+
+  &.completed {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+
+  &.planned {
+    background-color: #f4c35a;
+    color: rgb(146, 137, 94);
+  }
+}
+
+.projectInfoDescription {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+.editButton,
+.deleteButton {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.editButton {
+  background-color: #e0f2fe;
+  color: #0284c7;
+
+  &:hover:not(:disabled) {
+    background-color: #bae6fd;
+  }
+}
+
+.deleteButton {
+  background-color: #fee2e2;
+  color: #dc2626;
+
+  &:hover:not(:disabled) {
+    background-color: #fecaca;
+  }
+}
+
+.projectInfoActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+
+  .editButton,
+  .deleteButton {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+}

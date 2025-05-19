@@ -1,48 +1,29 @@
 'use client';
 
 import React, { useState } from "react";
-import style from  './styles.module.scss';  // Import the SCSS file for modal styles
+import style from './LogoutButton.module.scss';
+import { deleteCookie } from 'cookies-next';
 
 export const LogoutButton = () => {
-  // State to manage modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Function to open the modal
-  const handleLogoutClick = () => {
-    setIsModalOpen(true);
-  };
-
-  // Function to close the modal
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Function to handle logout confirmation
   const handleConfirmLogout = () => {
-    // Here, you would add logic to log out the user
-    console.log("Logging out...");
-
-    // Redirect to login page or handle the logout action
-    // You can clear cookies, localStorage, etc., or make an API call
-
-    // Close the modal after confirming logout
+    deleteCookie('userRole', { path: '/' });
+    
     setIsModalOpen(false);
-
-    // Redirect to login page (for example)
-    window.location.href = "/login_page";
+    window.location.href = "/login";
   };
 
   return (
     <div>
-      <button onClick={handleLogoutClick}>Logout</button>
+      <button className={style.button_logout} onClick={() => setIsModalOpen(true)}>Log out</button>
 
-      {/* Modal */}
       {isModalOpen && (
-        <div className={style.modal}>
-          <div className={style.modalContent}>
+        <div className={style.modal_overlay}>
+          <div className={style.modal_content}>
             <h2>Are you sure you want to log out?</h2>
-            <button className={style.button} onClick={handleConfirmLogout}>Yes, Log Out</button>
-            <button className={style.button} onClick={handleCloseModal}>Cancel</button>
+            <button className={style.modal_button} onClick={handleConfirmLogout}>Log out</button>
+            <button className={style.modal_button_cancel} onClick={() => setIsModalOpen(false)}>Cancel</button>
           </div>
         </div>
       )}

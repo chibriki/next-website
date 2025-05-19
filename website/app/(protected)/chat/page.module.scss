@@ -1,0 +1,117 @@
+.chatContainer {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  width: 78%;
+  height: 92%;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  flex: 1;
+  height: 80%;
+  padding: 16px;
+  overflow-y: scroll;
+  background: #ffffff;
+}
+
+.messageBubble {
+  max-width: 60%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  color: black;
+  display: inline-block;
+  margin-bottom: 12px;
+
+  .sender {
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .content {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+.ownMessage {
+  background-color: #024087;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+  border-bottom-right-radius: 0;
+}
+
+.otherMessage {
+  background-color: #e5e5ea;
+  color: black;
+  align-self: flex-start;
+  margin-right: auto;
+  border-bottom-left-radius: 0;
+}
+
+.timestamp {
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  border-top: 1px solid #ddd;
+  padding: 12px;
+  background: white;
+
+  textarea {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
+
+  button {
+    white-space: nowrap;
+    padding: 8px 16px;
+    background: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.tab,
+.activeTab {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #eee;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.activeTab {
+  background: #0070f3;
+  color: white;
+}
