@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0.41
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - MYSQL_SSL=false
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql-conf:/etc/mysql/conf.d
+      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
+    command: mysqld --skip-ssl --bind-address=0.0.0.0
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh",
+          "-c",
+          "mysql -uroot -p$$MYSQL_ROOT_PASSWORD -hlocalhost -e 'SELECT 1;'",
+        ]
+      interval: 10s
+      retries: 20
+      timeout: 5s
+      start_period: 60s
+    networks:
+      - app-network
+
+  hierarchy-website:
+    container_name: hierarchy-website
+    image: docker.io/loendeer/hierarchy-website:0.0.1
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    command: sh -c "sleep 10 && npm start"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
