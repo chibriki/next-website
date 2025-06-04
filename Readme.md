@@ -1,4 +1,4 @@
-# Bukovel System
+# 🌲Bukovel System
 
 A modern web application built with Next.js, React, and MySQL, containerized using Docker/Podman.
 
