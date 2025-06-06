@@ -57,7 +57,12 @@ The application will be available at `http://localhost:3000`
    npm install
    ```
 
-2. Start the development server:
+2. Generate the database:
+   ```bash
+   npx prisma generate
+   ```
+
+3. Start the development server:
    ```bash
    npm run dev
    ```
