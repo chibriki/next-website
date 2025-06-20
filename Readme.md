@@ -1,6 +1,7 @@
 # 🌲Bukovel System
 
-A modern web application built with Next.js, React, and MySQL, containerized using Docker/Podman.
+A web application built with Next.js, React, and MySQL, containerized using Docker/Podman.
+Designed as an internal application for Bukovel employees in Ukraine, the system provides functionality for managing workers and projects. Key features include role-based login, worker and project tracking, lift management with projects assigned to them, and a real-time chat, supporting both team-based and general channels.
 
 ## 🚀 Features
 
